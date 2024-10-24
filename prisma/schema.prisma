@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  relationMode= "prisma"
+}
+
+model Proyects{
+  idProyecto String @id @default(uuid())
+  userId  String
+  nombre String @db.Text
+  Responsable String? @db.Text
+  Descripcion String @db.Text
+  Tipo String? @db.Text
+  Duracion String @db.Text
+ 
+  historia Historia []
+  events Event[]
+  planificacion Planificacion[]
+
+
+  createdAt DateTime @default(now())
+  updatedat DateTime @updatedAt
+
+  colaborador Colaborador? @relation(fields: [Responsable], references: [idcolaborador], onDelete: Cascade)
+  @@index([Responsable])
+  tipoproyecto TipoProyecto? @relation(fields: [Tipo], references: [idTipo], onDelete: Cascade)
+  @@index([Tipo])
+
+}
+
+model Historia{
+  idHistoria String @id @default(uuid())
+  idProyect String? @db.Text
+  nombre String @db.Text
+  estado String? @db.Text
+  descripcion String @db.Text
+  responsable String? @db.Text
+  prioridad String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  defectos Defectos []
+
+
+proyects Proyects? @relation(fields: [idProyect], references: [idProyecto], onDelete: Cascade)
+estadohistoria EstadoHistoria? @relation(fields: [estado], references: [idEstadoH], onDelete: Cascade)
+prioridadhistoria PrioridadHistoria? @relation(fields: [prioridad], references: [idPrioridadH], onDelete: Cascade)
+colaborador Colaborador? @relation(fields: [responsable], references: [idcolaborador], onDelete: Cascade)
+  @@index([responsable])
+  @@index([idProyect])
+  @@index([estado])
+  @@index([prioridad])
+}
+
+model Defectos{
+  idDefecto String @id @default(uuid())
+  historiaid String @db.Text
+  nombre String @db.Text
+  estado String? @db.Text
+  gravedad String @db.Text
+  descripcion String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  historia Historia? @relation(fields: [historiaid], references: [idHistoria], onDelete:Cascade )
+ 
+  estadoissue EstadoIssue? @relation(fields: [estado], references: [idEstadoH], onDelete:Cascade )
+  @@index([estado])
+  @@index([historiaid])
+}
+
+model EstadoHistoria{
+  idEstadoH String @id @default(uuid())
+  Estado String @db.Text
+  
+  historia Historia [] 
+}
+
+model PrioridadHistoria{
+  idPrioridadH String @id @default(uuid())
+  PrioridadH String @db.Text
+  
+  historia Historia [] 
+}
+model TipoProyecto{
+  idTipo String @id @default(uuid())
+  TIpoProyecto String @db.Text
+
+    proyects Proyects []
+
+}
+model EstadoIssue{
+  idEstadoH String @id @default(uuid())
+  Estado String @db.Text
+
+  Defectos Defectos[]
+}
+
+model Colaborador{
+  idcolaborador String @id @default(uuid())
+  nombre String @db.Text
+  apellido String @db.Text
+  rol String @db.Text
+  correo String @db.Text
+  dpi String @db.Text
+
+  historia Historia [] 
+  proyects Proyects []
+}
+
+model Event{
+  idEvent String @id @default(uuid())
+  proyectoid String @db.Text
+  nombre String @db.Text
+  start DateTime
+  allDay Boolean
+  timeFormat String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  proyects Proyects? @relation(fields: [proyectoid], references: [idProyecto])
+  @@index([proyectoid])
+}
+
+model Planificacion{
+  idplanificacion String @id @default(uuid())
+  proyectoid String @db.Text
+  emison DateTime 
+  observaciones String @db.Text
+  lenguaje String @db.Text
+  version String @db.Text
+  idioma String @db.Text
+  sprint String @db.Text
+  puebas String @db.Text
+  plataforma String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  proyects Proyects? @relation(fields: [proyectoid], references: [idProyecto])
+  @@index([proyectoid])
+}
