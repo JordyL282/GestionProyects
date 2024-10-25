@@ -1,23 +1,12 @@
-"use client"
-
-import Link  from "next/link";
 import { SidebarItemProps } from "./SidebarItem.types";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 
-export function SidebarItem(props: SidebarItemProps){
-    const {item} = props
-    const {href, icon:Icon, label}= item
-    const pathname = usePathname()
-    const activePath = pathname === href
+export function SidebarItem({ item }: { item: SidebarItemProps }) {
+  const { icon: Icon, label, href } = item;
 
-    return(
-        <Link href={href}
-        className={cn(`flex gap-x-2 mt-2 light:text-slate-700 dark:text-white text-sm items-center 
-        hover:bg-slate-300/20 p-2 rounded-lg cursor-pointer`)}>
-
-        <Icon className="h-5 w-5" strokeWidth={1}/>
-        {label}
-        </Link>
-    )
+  return (
+    <a href={href} className="flex items-center p-2 hover:bg-gray-100">
+      <Icon className="mr-2" />
+      {label}
+    </a>
+  );
 }
