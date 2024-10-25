@@ -174,8 +174,8 @@ export function VerHistoria(props: VerHistoriaProps) {
 
             <div className="font-bold">Estado:</div>
             <div>
-              <Select onValueChange={(value) => form.setValue('estado', value)} defaultValue={historia?.estado}>
-                <SelectTrigger>
+            <Select onValueChange={(value) => form.setValue('estado', value)} defaultValue={historia?.estado || undefined}>
+            <SelectTrigger>
                   <SelectValue placeholder="Seleccionar" />
                 </SelectTrigger>
                 <SelectContent>

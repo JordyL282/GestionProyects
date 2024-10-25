@@ -1,5 +1,6 @@
-import {Dispatch, SetStateAction} from "react"
+import { Dispatch, SetStateAction } from "react";
 
 export type FormularioNuevoIssueProps = {
-    setOpen: Dispatch<SetStateAction<boolean>>
-}
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    historiaId: string; 
+};
