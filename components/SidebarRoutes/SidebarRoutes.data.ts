@@ -8,6 +8,7 @@ export const dataGeneralSidebar = [
     href: "/"
   },
   {
+    //jordy lemus
     icon: Building2,
     label: "Proyectos",
     href: "/Proyects"
