@@ -18,6 +18,7 @@ import { FormularioNuevoIssue } from "../components/NuevoIssue/FormularioNuevoIs
 import { Separator } from "@radix-ui/react-select";
 import { useParams, useRouter } from "next/navigation";
 
+
 type EstadoHistoria = {
   idEstadoH: string;
   Estado: string;
