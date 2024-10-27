@@ -1,5 +1,5 @@
-import { GitHubLogoIcon, MixIcon } from '@radix-ui/react-icons';
-import { BarChart4, Building2, Calendar, PersonStanding, Rocket } from 'lucide-react';
+
+import { BarChart4, Building2, Calendar, Code, Edit, GitBranch, PersonStanding, PersonStandingIcon, Rocket } from 'lucide-react';
 
 export const dataGeneralSidebar = [
   {
@@ -14,15 +14,15 @@ export const dataGeneralSidebar = [
     href: "/Proyects"
   },
   {
-    icon: Calendar,
-    label: "Calendario",
-    href: "/task"
+    icon: Code,
+    label: "Codigo",
+    href: "/Automatizacion"
   }
 ];
 
 export const dataToolsSidebar = [
   {
-    icon: Rocket,
+    icon: Edit,
     label: "Planificación",
     href: "/Planificacion"
   }
@@ -30,12 +30,12 @@ export const dataToolsSidebar = [
 
 export const dataSuportSidebar = [
   {
-    icon: Rocket,
+    icon: PersonStandingIcon,
     label: "Casos de Uso",
     href: "/casosdeuso"
   },
   {
-    icon: Rocket,
+    icon: GitBranch,
     label: "Gitea",
     href: "/Gitea"
   }

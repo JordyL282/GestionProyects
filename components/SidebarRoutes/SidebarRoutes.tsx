@@ -23,7 +23,7 @@ export function SidebarRoutes(){
                 </div>
                 <Separator/>
                 <div className="p-2 md:p-6">
-                    <p className="text-slate-500 mb-2">Soporte</p>
+                    <p className="text-slate-500 mb-2">Otros</p>
                     {dataSuportSidebar.map((item)=>(
                         <SidebarItem key={item.label} item={item}/>
                     ))}
